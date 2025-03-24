@@ -41,27 +41,27 @@ The task should be completed in a team of max. 2 people or, if necessary, alone.
 
 ###   Table:
 
-|   Requirement   |   Description   |   Fulfilled   |
-| :-------------: | :----------------------------------------------------: | :-----------: |
-|        1        | In the "main" function, store the program arguments (`argv`) in a C++ string vector and output all elements in a for loop using `cout`. |         X      |
-|        2        | Assignment of a program argument to a floating-point variable, with conversion from "string" to "double". |      X         |
-|        3        | Program further functionality (the other requirements in the table) in the files "labor1.[h c]pp". |          X     |
-|        4        | Application of any transcendental mathematical function from "cmath" to the above variable and storage of the result in a variable. |      X         |
-|        5        | Type conversion by means of C++ cast of the above variable into an integer value and assignment into an integer variable. |       X        |
-|        6        | Definition and call of a function that receives the above integer value as an argument and changes it in the scope of the caller. Use "const" correctly in the argument list of the function declaration, if necessary! |      X         |
-|        7        | Output the integer value in hexadecimal formatting in the console, use iostream for this. |        X       |
-|        8        | Definition of an own data type "Person" (e.g., first name (string), last name (string), date of birth (string), age in years (int), days (int) and hours (int)) based on a structure. |               |
-|        9        | Create a vector of persons. |               |
-|       10        | Read in the person data from a file with C++ ifstream. |               |
-|       11        | Catch C++ exceptions when reading the file (e.g., file not present). |               |
-|       12        | File name should be determined by the user via argv. |               |
-|       13        | Calculate the age from the date of birth in hours, days, years, use std::chrono and/or ctime for this (e.g., given date of birth 3.4.1983, from this calculation of the age e.g., 40 years 0 days and 4 hours). Output the age in years in text form on the console, example calculated age = 43.123 years, from this the output on the console "Person is forty-three years old!" (omit decimal places). |               |
-|       14        | Use "array<string const, XXX> const {}" here for the text templates of your numbers (note, for example, the number 47 can be composed of "seven" + "and" + "forty" from strings). The date of birth should only be after 1.1.1900. |               |
-|       15        | Use the "range-based loop" for iteration with type inference to iterate through the vectors! |               |
-|       16        | Use C++ Stream IO for text input/output! |               |
-|    17 - 20    | Use appropriate built-in data types or std::string and std::vector! Pay attention to signedness! Use the type inference "auto" at least once for the return value of a function! Initialize all variables in C++11 style! `int a {5}` without =! Use references for function arguments, if possible! Assignment operator |               |
-|        21        | Use "const" whenever possible! |               |
-|        22        | Only declare the public functions (i.e., those called in main.cpp) in the file labor1.hpp. |               |
+|   Requirement   |   Description   | Fulfilled |
+| :-------------: | :----------------------------------------------------: |:---------:|
+|        1        | In the "main" function, store the program arguments (`argv`) in a C++ string vector and output all elements in a for loop using `cout`. |     X     |
+|        2        | Assignment of a program argument to a floating-point variable, with conversion from "string" to "double". |     X     |
+|        3        | Program further functionality (the other requirements in the table) in the files "labor1.[h c]pp". |     X     |
+|        4        | Application of any transcendental mathematical function from "cmath" to the above variable and storage of the result in a variable. |     X     |
+|        5        | Type conversion by means of C++ cast of the above variable into an integer value and assignment into an integer variable. |     X     |
+|        6        | Definition and call of a function that receives the above integer value as an argument and changes it in the scope of the caller. Use "const" correctly in the argument list of the function declaration, if necessary! |     X     |
+|        7        | Output the integer value in hexadecimal formatting in the console, use iostream for this. |     X     |
+|        8        | Definition of an own data type "Person" (e.g., first name (string), last name (string), date of birth (string), age in years (int), days (int) and hours (int)) based on a structure. |           |
+|        9        | Create a vector of persons. |           |
+|       10        | Read in the person data from a file with C++ ifstream. |           |
+|       11        | Catch C++ exceptions when reading the file (e.g., file not present). |           |
+|       12        | File name should be determined by the user via argv. |           |
+|       13        | Calculate the age from the date of birth in hours, days, years, use std::chrono and/or ctime for this (e.g., given date of birth 3.4.1983, from this calculation of the age e.g., 40 years 0 days and 4 hours). Output the age in years in text form on the console, example calculated age = 43.123 years, from this the output on the console "Person is forty-three years old!" (omit decimal places). |           |
+|       14        | Use "array<string const, XXX> const {}" here for the text templates of your numbers (note, for example, the number 47 can be composed of "seven" + "and" + "forty" from strings). The date of birth should only be after 1.1.1900. |           |
+|       15        | Use the "range-based loop" for iteration with type inference to iterate through the vectors! |           |
+|       16        | Use C++ Stream IO for text input/output! |           |
+|    17 - 20    | Use appropriate built-in data types or std::string and std::vector! Pay attention to signedness! Use the type inference "auto" at least once for the return value of a function! Initialize all variables in C++11 style! `int a {5}` without =! Use references for function arguments, if possible! Assignment operator |           |
+|        21        | Use "const" whenever possible! |           |
+|        22        | Only declare the public functions (i.e., those called in main.cpp) in the file labor1.hpp. |           |
 
 ##   Questions about the Lab Experiment
 

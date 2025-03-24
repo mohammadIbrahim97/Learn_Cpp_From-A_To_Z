@@ -34,3 +34,9 @@ int HexadecimalFormat(int *Hexa)
     cin >> *Hexa;
     cout << hex<< uppercase <<*Hexa;
 }
+
+void printPerson(struct person p)
+{
+    cout << p.firstName << " " << p.lastName << endl;
+
+}
