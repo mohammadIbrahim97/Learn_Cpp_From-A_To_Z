@@ -13,11 +13,25 @@ int CallByReference(int* numPtr);
 int HexadecimalFormat(int* Hexa);
 struct person
 {
-    string firstName;
-    string lastName;
-    int age;
-
+    std::string firstName;
+    std::string lastName;
+    std::string birthDate;
+    int struct_years;
+    int struct_months;
+    int struct_days;
+    int struct_hours;
+    int struct_minutes;
+    int struct_seconds;
 };
 
-void printPerson(struct person p);
+void readperson(person &p);
+void displayperson(person &p);
+int getCurrentYear();
+int getCurrentMonth();
+int getCurrentDay();
+int getCurrentHour();
+int getCurrentMinute();
+int getCurrentSecond();
+
+
 #endif //LABOR1_H

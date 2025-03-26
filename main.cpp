@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <chrono>
 #include "labor1.h"
 
 using namespace std;
@@ -10,7 +12,8 @@ int main(int argc, char *__argv[]) {
         cout << "Argument" << i << __argv[i] << std::endl;
     }
 
-    // Anforderung 2
+   /*
+    * // Anforderung 2
     const char s1[5] {"3.14"};
     // Anforderung 3
     // NOT including <xstring> OR <string> in the same file cause the identifier "stod" is undefined error
@@ -27,6 +30,24 @@ int main(int argc, char *__argv[]) {
     cout << "CallByReference After : " << CallByReference(&value) << endl;
     int Hexa;
     cout << "HexadecimalFormat: " << HexadecimalFormat(&Hexa) << endl;
+    --------*/
+    // Anforderung 8
+    person thePerson;
+    readperson(thePerson);
+    displayperson(thePerson);
+
+    // int year = getCurrentYear();
+    // cout << year << endl;
+    // int month = getCurrentMonth();
+    // cout << month << endl;
+    // int day = getCurrentDay();
+    // cout << day << endl;
+    // int hour = getCurrentHour();
+    // cout << hour << endl;
+    // int minute = getCurrentMinute();
+    // cout << minute << endl;
+    // int second = getCurrentSecond();
+    // cout << second << endl;
 
 
 
