@@ -2,6 +2,8 @@
 #include <string>
 #include <ctime>
 #include <chrono>
+#include <fstream>
+
 #include "labor1.h"
 
 using namespace std;
@@ -33,9 +35,13 @@ int main(int argc, char *__argv[]) {
     --------*/
     // Anforderung 8
     person thePerson;
-    readperson(thePerson);
-    displayperson(thePerson);
-
+    // readperson(thePerson);
+    // displayperson(thePerson);
+    std::vector<person> personsVector = {thePerson, thePerson, thePerson};
+    for (int i = 0; i < personsVector.size(); i++)
+    {
+        std::cout << i << std::endl;
+    }
     // int year = getCurrentYear();
     // cout << year << endl;
     // int month = getCurrentMonth();
@@ -50,6 +56,35 @@ int main(int argc, char *__argv[]) {
     // cout << second << endl;
 
 
+    fstream myfile;
+    myfile.open("data.txt", ios::out);
+    if (myfile.is_open()) {
+        myfile << "Bernd\n";
+        myfile << "Bernd\n";
+        myfile << "22.10.1975\n";
+        myfile << "Sina\n";
+        myfile << "Hansen\n";
+        myfile << "10.02.2001\n";
+        myfile << "Gerda\n";
+        myfile << "Schmidt\n";
+        myfile << "04.05.1954\n";
+        myfile << "Max\n";
+        myfile << "Mustermann\n";
+        myfile << "31.04.1902\n";
+        myfile.close();
+    } else {
+        cout << "Unable to open file";
+    }
+    myfile.open("data.txt", ios::in);
+    if (myfile.is_open()) {
+        string line;
+        while (getline(myfile, line)) {
+            cout << line << '\n';
+        }
+        myfile.close();
+    } else {
+        cout << "Unable to open file";
+    }
 
 
     return 0;

@@ -37,27 +37,42 @@ int HexadecimalFormat(int *Hexa)
     cout << hex<< uppercase <<*Hexa;
 }
 
-void readperson( person &p)
+void readperson(person &p)
 {
-    std:: cout << "Enter the first and Last name: ";
-    std:: cin >> p.firstName;
-    std:: cin  >> p.lastName;
-    std:: cout << "Enter Births date e.g.(TT.MM.JAHR): ";
-    std:: cin >> p.birthDate;
-    std:: string string_birthyear {p.birthDate.substr(6,4)};
+    std::cout << "Enter the first and Last name: ";
+    std::cin >> p.firstName;
+    std::cin >> p.lastName;
+    std::cout << "Enter Births date e.g.(TT.MM.JAHR): ";
+    std::cin >> p.birthDate;
+
+    std::string string_birthyear {p.birthDate.substr(6, 4)};
     int int_birthyear {stoi(string_birthyear)};
-    p.struct_years = {getCurrentYear()-int_birthyear};
-
-    std:: string string_birthmonth {p.birthDate.substr(3,2)};
+    std::string string_birthmonth {p.birthDate.substr(3, 2)};
     int int_birthmonth {stoi(string_birthmonth)};
-    p.struct_months = {getCurrentMonth()};
+    std::string string_birthday {p.birthDate.substr(0, 2)};
+    int int_birthday {stoi(string_birthday)};
 
-    std:: string string_birthday {p.birthDate.substr(0,2)};
-    p.struct_days = {getCurrentDay()};
-    p.struct_hours = {getCurrentHour()};
-    p.struct_minutes = {getCurrentMinute()};
-    p.struct_seconds = {getCurrentSecond()};
+    int currentYear = getCurrentYear();
+    int currentMonth = getCurrentMonth();
+    int currentDay = getCurrentDay();
 
+    p.struct_years = currentYear - int_birthyear;
+    p.struct_months = currentMonth - int_birthmonth;
+    p.struct_days = currentDay - int_birthday;
+
+    if (p.struct_days < 0) {
+        p.struct_months--;
+        p.struct_days += 30;
+    }
+
+    if (p.struct_months < 0) {
+        p.struct_years--;
+        p.struct_months += 12;
+    }
+
+    p.struct_hours = getCurrentHour();
+    p.struct_minutes = getCurrentMinute();
+    p.struct_seconds = getCurrentSecond();
 }
 void displayperson( person &p)
 {
