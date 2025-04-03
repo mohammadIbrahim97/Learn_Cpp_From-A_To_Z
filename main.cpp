@@ -14,8 +14,7 @@ int main(int argc, char *__argv[]) {
         cout << "Argument" << i << __argv[i] << std::endl;
     }
 
-   /*
-    * // Anforderung 2
+    // Anforderung 2
     const char s1[5] {"3.14"};
     // Anforderung 3
     // NOT including <xstring> OR <string> in the same file cause the identifier "stod" is undefined error
@@ -32,11 +31,10 @@ int main(int argc, char *__argv[]) {
     cout << "CallByReference After : " << CallByReference(&value) << endl;
     int Hexa;
     cout << "HexadecimalFormat: " << HexadecimalFormat(&Hexa) << endl;
-    --------*/
     // Anforderung 8
     person thePerson;
-    // readperson(thePerson);
-    // displayperson(thePerson);
+    readperson(thePerson);
+    displayperson(thePerson);
     std::vector<person> personsVector = {thePerson, thePerson, thePerson};
     for (int i = 0; i < personsVector.size(); i++)
     {
