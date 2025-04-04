@@ -1,144 +1,156 @@
-//
-// Created by Mohammad on 18/03/2025.
-//
-
 #include "labor1.h"
 
 #include <chrono>
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <array>
+#include <vector>
+#include <ctime>
+#include <sstream>
 
 const double pi = std::acos(-1);
 
 using namespace std;
 
+// Anforderung 4
 int mathefunction(int param1, int param2) {
     int res = pow(param1, param2);
-    return  res;
+    return res;
 }
 
+// Anforderung 3
 float sinfunction() {
     float resul;
     resul = sin(pi / 6);
     return resul;
 }
 
-int CallByReference(int *numPtr)
-{
-    (*numPtr) ++;
+// Anforderung 6, 20
+int CallByReference(int* numPtr) {
+    (*numPtr)++;
     return *numPtr;
 }
 
-int HexadecimalFormat(int *Hexa)
-{
-    cout << "Geben Sie eine Ganzezahl an...";
+// Anforderung 7
+int HexadecimalFormat(int* Hexa) {
+    cout << "Geben Sie eine Ganzzahl ein: ";
     cin >> *Hexa;
-    cout << hex<< uppercase <<*Hexa;
+    cout << "Hexadezimal: " << hex << uppercase << *Hexa << endl;
+    return *Hexa;
 }
+
+// Anforderung 18
+auto getPersonCount(const std::vector<person>& persons) -> size_t {
+    return persons.size();
+}
+
+// Anforderung 8, 13
 
 void readperson(person &p)
 {
     std::cout << "Enter the first and Last name: ";
-    std::cin >> p.firstName;
-    std::cin >> p.lastName;
-    std::cout << "Enter Births date e.g.(TT.MM.JAHR): ";
+    std::cin >> p.firstName >> p.lastName;
+    std::cout << "Enter Birth date (TT.MM.JJJJ): ";
     std::cin >> p.birthDate;
 
-    std::string string_birthyear {p.birthDate.substr(6, 4)};
-    int int_birthyear {stoi(string_birthyear)};
-    std::string string_birthmonth {p.birthDate.substr(3, 2)};
-    int int_birthmonth {stoi(string_birthmonth)};
-    std::string string_birthday {p.birthDate.substr(0, 2)};
-    int int_birthday {stoi(string_birthday)};
-
-    int currentYear = getCurrentYear();
-    int currentMonth = getCurrentMonth();
-    int currentDay = getCurrentDay();
-
-    p.struct_years = currentYear - int_birthyear;
-    p.struct_months = currentMonth - int_birthmonth;
-    p.struct_days = currentDay - int_birthday;
-
-    if (p.struct_days < 0) {
-        p.struct_months--;
-        p.struct_days += 30;
+    std::tm birth_tm = {};
+    std::istringstream ss(p.birthDate);
+    ss >> std::get_time(&birth_tm, "%d.%m.%Y");
+    if (ss.fail()) {
+        std::cerr << "Ungültiges Datumsformat!" << std::endl;
+        return;
     }
 
-    if (p.struct_months < 0) {
-        p.struct_years--;
-        p.struct_months += 12;
+    auto birth_time = std::chrono::system_clock::from_time_t(std::mktime(&birth_tm));
+    auto now = std::chrono::system_clock::now();
+    auto duration = now - birth_time;
+
+    auto total_seconds = std::chrono::duration_cast<std::chrono::seconds>(duration).count();
+    auto total_minutes = total_seconds / 60;
+    auto total_hours = total_minutes / 60;
+    auto total_days = total_hours / 24;
+    auto total_years = total_days / 365;  // grob
+
+    p.struct_years = static_cast<int>(total_years);
+    p.struct_days = static_cast<int>(total_days % 365);
+    p.struct_hours = static_cast<int>(total_hours % 24);
+    p.struct_minutes = static_cast<int>(total_minutes % 60);
+    p.struct_seconds = static_cast<int>(total_seconds % 60);
+}
+
+
+// Anforderung 9, 14, 15
+void displayperson(const person &p) {
+    cout << "Name: " << p.firstName << " " << p.lastName << endl;
+    cout << "Geburtsdatum: " << p.birthDate << endl;
+    cout << "Alter: " << p.struct_years << " Jahre, "
+         << p.struct_months << " Monate, "
+         << p.struct_days << " Tage." << endl;
+}
+
+// Anforderung 14
+std::string numberToGermanText(int number) {
+    static const std::array<std::string, 20> units{
+        "null", "eins", "zwei", "drei", "vier", "fünf", "sechs",
+        "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn",
+        "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"
+    };
+
+    static const std::array<std::string, 10> tens{
+        "", "", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig",
+        "siebzig", "achtzig", "neunzig"
+    };
+
+    if (number < 20) {
+        return units[number];
+    } else {
+        int unit = number % 10;
+        int ten = number / 10;
+        if (unit == 0) return tens[ten];
+        return units[unit] + "und" + tens[ten];
     }
-
-    p.struct_hours = getCurrentHour();
-    p.struct_minutes = getCurrentMinute();
-    p.struct_seconds = getCurrentSecond();
-}
-void displayperson( person &p)
-{
-    cout << "First name & last name: " << p.firstName<<" " << p.lastName << std::endl;
-    cout << "Birth date: " << p.birthDate << std::endl;
-    // cout << readperson << std::endl;
-    // cout << "person in years: "<<p.struct_years << std::endl;
-    // cout << "person in months: "<<p.struct_months << std::endl;
-    // cout << "person in days: "<<p.struct_days << std::endl;
-    cout << p.firstName <<" "<< p.lastName <<" was born since: " << p.struct_years<<" Years "<<p.struct_months<< " months "<<p.struct_days << " days "<<p.struct_hours<<" hours "<<p.struct_minutes<< " minuts "<<p.struct_seconds << " Seconds ago."<< endl;
-
-
-
 }
 
-int getCurrentYear()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    // std::time_t time = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    std:: time_t time= std::chrono::system_clock::to_time_t(start);
-    std:: tm* localTime = std::localtime(&time);
-    int currentyear =localTime->tm_year + 1900;
-
-    return currentyear;
+void printAgeInText(const person& p) {
+    std::cout << p.firstName << " ist " << numberToGermanText(p.struct_years)
+              << " Jahre alt!" << std::endl;
 }
 
-int getCurrentMonth()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    std::time_t time = std::chrono::system_clock::to_time_t(start);
-    std::tm* localTime = std::localtime(&time);
-    int currentmonth = localTime->tm_mon + 1;
-    return currentmonth;
+// Anforderungen 13 (chrono)
+int getCurrentYear() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local = std::localtime(&t);
+    return local->tm_year + 1900;
 }
-
-
-int getCurrentDay()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    std::time_t time = std::chrono::system_clock::to_time_t(start);
-    std::tm* localTime = std::localtime(&time);
-    int currentday = localTime->tm_mday;
-    return currentday;
+int getCurrentMonth() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local = std::localtime(&t);
+    return local->tm_mon + 1;
 }
-
-int getCurrentHour()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    std::time_t time = std::chrono::system_clock::to_time_t(start);
-    std::tm* localTime = std::localtime(&time);
-    int currenthour = localTime->tm_hour;
-    return currenthour;
+int getCurrentDay() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local = std::localtime(&t);
+    return local->tm_mday;
 }
-int getCurrentMinute()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    std::time_t time = std::chrono::system_clock::to_time_t(start);
-    std::tm* localTime = std::localtime(&time);
-    int currentminute = localTime->tm_min;
-    return currentminute;
+int getCurrentHour() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local = std::localtime(&t);
+    return local->tm_hour;
 }
-int getCurrentSecond()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    std::time_t time = std::chrono::system_clock::to_time_t(start);
-    std::tm* localTime = std::localtime(&time);
-    int currentsecond = localTime->tm_sec;
-    return currentsecond;
+int getCurrentMinute() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local = std::localtime(&t);
+    return local->tm_min;
+}
+int getCurrentSecond() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local = std::localtime(&t);
+    return local->tm_sec;
 }

@@ -3,87 +3,96 @@
 #include <ctime>
 #include <chrono>
 #include <fstream>
+#include <vector>
+#include <stdexcept> // Für Exception Handling
 
 #include "labor1.h"
 
 using namespace std;
 
-int main(int argc, char *__argv[]) {
+int main(int argc, char* argv[]) {
 
-    for (int i = 1; i < argc; i++) {
-        cout << "Argument" << i << __argv[i] << std::endl;
+
+    // Anforderung 1: argv in vector speichern + Ausgabe mit for-Schleife
+    std::vector<std::string> arguments;
+    for (int i = 1; i < argc; ++i) {
+        arguments.push_back(argv[i]);
     }
 
-    // Anforderung 2
-    const char s1[5] {"3.14"};
-    // Anforderung 3
-    // NOT including <xstring> OR <string> in the same file cause the identifier "stod" is undefined error
-    cout  <<"Anforderung 2: "<< stod(s1) << endl;
-    // Anforderung 3
-    cout <<"Anforderung 3: "<< sinfunction()<< endl;
-    // Anforderung 4
-    cout <<"Anforderung 4: "<<mathefunction(2, 3) << endl;
-    // Anforderung 5
+    for (const auto& arg : arguments) {
+        std::cout << "Argument: " << arg << std::endl;
+    }
 
-    // Anforderung 6
-    int value {5};
-    cout << "CallByReference before: " << value << endl;
-    cout << "CallByReference After : " << CallByReference(&value) << endl;
-    int Hexa;
-    cout << "HexadecimalFormat: " << HexadecimalFormat(&Hexa) << endl;
-    // Anforderung 8
+    // Anforderung 2: string → double
+    double piValue = stod("3.14159");
+    std::cout << "Anforderung 2: double = " << piValue << std::endl;
+
+    // Anforderung 4: transzendente Funktion
+    float sinRes = sinfunction();
+    std::cout << "Anforderung 4 (sin(pi/6)): " << sinRes << std::endl;
+
+    // Anforderung 5: Cast von double → int
+    int intPi = static_cast<int>(piValue);
+    std::cout << "Anforderung 5 (int von pi): " << intPi << std::endl;
+
+    // Anforderung 6: Call-by-Reference
+    int value {5};  // Anforderung 19
+    std::cout << "CallByReference vor Aufruf: " << value << std::endl;
+    std::cout << "CallByReference nach Aufruf: " << CallByReference(&value) << std::endl;
+
+    // Anforderung 7: Hexadezimalformat
+    int hexa {0};  // Anforderung 19
+    HexadecimalFormat(&hexa);
+
+    // Anforderung 8: eigene Struktur
     person thePerson;
     readperson(thePerson);
     displayperson(thePerson);
-    std::vector<person> personsVector = {thePerson, thePerson, thePerson};
-    for (int i = 0; i < personsVector.size(); i++)
-    {
-        std::cout << i << std::endl;
+
+    // Anforderung 14: Ausgabe des Alters in Text
+    printAgeInText(thePerson);
+
+    // Anforderung 9: Vektor von Personen
+    std::vector<person> personsVector = {thePerson, thePerson};
+
+    // Anforderung 15: range-based loop + Anforderung 17
+    for (const auto& p : personsVector) {
+        displayperson(p);
     }
-    // int year = getCurrentYear();
-    // cout << year << endl;
-    // int month = getCurrentMonth();
-    // cout << month << endl;
-    // int day = getCurrentDay();
-    // cout << day << endl;
-    // int hour = getCurrentHour();
-    // cout << hour << endl;
-    // int minute = getCurrentMinute();
-    // cout << minute << endl;
-    // int second = getCurrentSecond();
-    // cout << second << endl;
 
+    // Anforderung 18: auto-Rückgabewert
+    std::cout << "Anzahl Personen im Vektor: " << getPersonCount(personsVector) << std::endl;
 
+    // Anforderung 10, 11, 12: Datei lesen mit Exception und argv
+    if (argc >= 2) {
+        std::ifstream inputFile(argv[1]);  // Datei aus argv[1]
+
+        try {
+            if (!inputFile.is_open()) {
+                throw std::runtime_error("Fehler beim Öffnen der Datei.");
+            }
+
+            std::string line;
+            while (std::getline(inputFile, line)) {
+                std::cout << "Dateizeile: " << line << std::endl;
+            }
+
+            inputFile.close();
+        } catch (const std::exception& e) {
+            std::cerr << "Exception gefangen: " << e.what() << std::endl;
+        }
+    } else {
+        std::cerr << "Bitte geben Sie den Dateinamen als argv[1] an!" << std::endl;
+    }
+
+    /*
     fstream myfile;
     myfile.open("data.txt", ios::out);
     if (myfile.is_open()) {
-        myfile << "Bernd\n";
-        myfile << "Bernd\n";
-        myfile << "22.10.1975\n";
-        myfile << "Sina\n";
-        myfile << "Hansen\n";
-        myfile << "10.02.2001\n";
-        myfile << "Gerda\n";
-        myfile << "Schmidt\n";
-        myfile << "04.05.1954\n";
-        myfile << "Max\n";
-        myfile << "Mustermann\n";
-        myfile << "31.04.1902\n";
+        myfile << "Beispielinhalt\n";
         myfile.close();
-    } else {
-        cout << "Unable to open file";
     }
-    myfile.open("data.txt", ios::in);
-    if (myfile.is_open()) {
-        string line;
-        while (getline(myfile, line)) {
-            cout << line << '\n';
-        }
-        myfile.close();
-    } else {
-        cout << "Unable to open file";
-    }
-
+    */
 
     return 0;
 }

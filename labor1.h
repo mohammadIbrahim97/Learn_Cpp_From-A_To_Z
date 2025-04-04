@@ -1,16 +1,9 @@
-//
-// Created by moham on 18/03/2025.
-//
-
 #ifndef LABOR1_H
 #define LABOR1_H
-#include <string>
 
-using namespace std;
-int mathefunction(int a, int b);
-float sinfunction();
-int CallByReference(int* numPtr);
-int HexadecimalFormat(int* Hexa);
+#include <string>
+#include <vector>
+
 struct person
 {
     std::string firstName;
@@ -24,8 +17,14 @@ struct person
     int struct_seconds;
 };
 
+// Anforderungen 3, 6, 20, 21, 22
+int mathefunction(int a, int b);
+float sinfunction();
+int CallByReference(int* numPtr);
+int HexadecimalFormat(int* Hexa);
+
 void readperson(person &p);
-void displayperson(person &p);
+void displayperson(const person &p);
 int getCurrentYear();
 int getCurrentMonth();
 int getCurrentDay();
@@ -33,5 +32,8 @@ int getCurrentHour();
 int getCurrentMinute();
 int getCurrentSecond();
 
+auto getPersonCount(const std::vector<person>& persons) -> size_t;
+std::string numberToGermanText(int number);
+void printAgeInText(const person& p);
 
 #endif //LABOR1_H
