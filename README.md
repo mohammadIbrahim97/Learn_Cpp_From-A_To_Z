@@ -18,18 +18,6 @@ everything and anything will you will find it here.
 * Functions with call-by-value and call-by-reference
 * Integration of standard C/C++ libraries
 
-##   Timeframe
-
-Attendance is mandatory for the labs. [cite: 1]
-
-Lab 1 is due by the 3rd lab session. Therefore, there are 2 weeks of processing time available. [cite: 2]
-
-The acceptance will be done by the lab staff. [cite: 3]
-
-Successful acceptance during the lab time is necessary for the issuing of the lab certificate. [cite: 3]
-
-The task should be completed in a team of max. 2 people or, if necessary, alone. [cite: 4]
-
 ##   Task Description
 
 1.  Use a compiler environment of your choice and create a new C++ project in an IDE of your choice with the following files:
@@ -114,8 +102,7 @@ Must be answered to receive the certificate:
 
 
 ```md
-# Programming in C++ – Lab 2
-**Prof. Dr. R. Manzke, Summer Semester 2025**
+
 
 ## Objectives
 - OOP with C++
@@ -132,12 +119,6 @@ Must be answered to receive the certificate:
 - Differences between stack and heap
 - C++ implementation of design patterns (here, the Factory pattern)
 
-## Time Frame
-- Attendance at the lab sessions is mandatory.
-- Lab 2 must be completed by the 5th lab session. You therefore have 2 weeks to work on it.
-- The lab staff will assess your work.
-- Successful completion during the lab time is mandatory for the lab certificate.
-- The assignment may be done in teams of up to 2 people or individually.
 
 ## Task Description
 Use a compiler environment of your choice and create a new C++ project in an IDE of your choice with the following files and requirements:
