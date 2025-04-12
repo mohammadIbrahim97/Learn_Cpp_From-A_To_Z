@@ -27,7 +27,7 @@ float sinfunction() {
 }
 
 // Anforderung 6, 20
-int CallByReference(int* numPtr) {
+int CallByReference(int* const numPtr) {
     (*numPtr)++;
     return *numPtr;
 }
@@ -36,7 +36,7 @@ int CallByReference(int* numPtr) {
 int HexadecimalFormat(int* Hexa) {
     cout << "Geben Sie eine Ganzzahl ein: ";
     cin >> *Hexa;
-    cout << "Hexadezimal: " << hex << uppercase << *Hexa << endl;
+    cout << "Hexadezimal: " << hex << uppercase << *Hexa << endl << dec;
     return *Hexa;
 }
 
@@ -90,7 +90,7 @@ void displayperson(const person &p) {
 }
 
 // Anforderung 14
-std::string numberToGermanText(int number) {
+std::string numberToText(int number) {
     static const std::array<std::string, 20> units{
         "null", "eins", "zwei", "drei", "vier", "fünf", "sechs",
         "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn",
@@ -113,7 +113,7 @@ std::string numberToGermanText(int number) {
 }
 
 void printAgeInText(const person& p) {
-    std::cout << p.firstName << " ist " << numberToGermanText(p.struct_years)
+    std::cout << p.firstName << " ist " << numberToText(p.struct_years)
               << " Jahre alt!" << std::endl;
 }
 
